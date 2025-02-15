@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\generatePdf;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RostersController;
 use App\Http\Controllers\PDFController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\PDFController;
  //   return view('layouts.app');
 //});
 Route::get('/generate-pdf',[PDFController::class,'generatePDF']);
+Route::get('/generate',[generatePdf::class,'generatePdf']);
 Route::get('/',function(){
-    
+  return view('generate-gis');
 });

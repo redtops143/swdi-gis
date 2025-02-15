@@ -284,7 +284,7 @@
                             </tr>
                             <tr>
                                 <td> Purok/Street No.</td>
-                                <td colspan="2" class="font_address"> {{ strtoupper($grantee['PUROK']) }} </td>
+                                <td colspan="2" class="font_address"> {{$grantee['PUROK']}} </td>
                                 
                             </tr>
                         </table>
@@ -332,7 +332,7 @@
                 @php 
                 
                     $x=1; 
-                    if($count_roster<=6){
+                    if($count_roster<6){
                 @endphp
 
                 @foreach ($family_rosters as $roster )
@@ -418,7 +418,359 @@
           
             @php
                 }
-                else if($count_roster>=7)
+                else if($count_roster==7)
+                {
+            @endphp
+
+            @foreach ($family_rosters as $roster )
+                <tr>
+                    <td height="20">{{ $x."."; }}</td>
+                    <td>{{$roster->LAST_NAME}}</td>
+                    <td>{{$roster->FIRST_NAME}}</td>
+                    <td>{{$roster->MIDDLE_NAME}}</td>
+                    <td>{{$roster->RELATION_TO_HH_HEAD}}</td>
+                    <td>{{$roster->SEX}}</td>
+                    <td>{{$roster->AGE}}</td>
+                    <td>{{$roster->BIRTHDAY}}</td>
+                    <td>{{$roster->CIVIL_STATUS}}</td>
+                    <td>{{$roster->GRADE_LEVEL}}</td>
+                    <td>{{$roster->ATTEND_SCHOOL}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @php $x++; @endphp
+                @endforeach 
+
+                @php
+                    $counter = 3;
+                    for($x=0;$x<$counter;$x++){
+                   
+                @endphp
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                @php
+                    }
+                @endphp
+                
+             
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+               
+            </table>
+            <table>
+            <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-weight: normal;font-size:12px">Accomplished by:</font></td>
+                    <td><font style="font-style:normal;font-weight: normal;font-size:12px">If not the ML/SWO</font></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>____________________________________</td>
+                    <td>_________________________________</td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-size:12px">Signature over Printed Name of the ML/SWO</font></td>
+                    <td><font style="font-style:normal;font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature over Printed Name</font></td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-size:8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Last Name, First Name, Middle Name)</font></td>
+                    <td><font style="font-style:normal;font-size:8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Last Name, First Name, Middle Name and Designation)</font></td>
+                </tr>
+            </table> 
+
+            @php
+                }else if($count_roster==8)
+                {
+            @endphp
+
+            @foreach ($family_rosters as $roster )
+                <tr>
+                    <td height="20">{{ $x."."; }}</td>
+                    <td>{{$roster->LAST_NAME}}</td>
+                    <td>{{$roster->FIRST_NAME}}</td>
+                    <td>{{$roster->MIDDLE_NAME}}</td>
+                    <td>{{$roster->RELATION_TO_HH_HEAD}}</td>
+                    <td>{{$roster->SEX}}</td>
+                    <td>{{$roster->AGE}}</td>
+                    <td>{{$roster->BIRTHDAY}}</td>
+                    <td>{{$roster->CIVIL_STATUS}}</td>
+                    <td>{{$roster->GRADE_LEVEL}}</td>
+                    <td>{{$roster->ATTEND_SCHOOL}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @php $x++; @endphp
+                @endforeach 
+
+                @php
+                    $counter = 2;
+                    for($x=0;$x<$counter;$x++){
+                   
+                @endphp
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                @php
+                    }
+                @endphp
+               
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+               
+            </table>
+            <table>
+            <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-weight: normal;font-size:12px">Accomplished by:</font></td>
+                    <td><font style="font-style:normal;font-weight: normal;font-size:12px">If not the ML/SWO</font></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>____________________________________</td>
+                    <td>_________________________________</td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-size:12px">Signature over Printed Name of the ML/SWO</font></td>
+                    <td><font style="font-style:normal;font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature over Printed Name</font></td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-size:8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Last Name, First Name, Middle Name)</font></td>
+                    <td><font style="font-style:normal;font-size:8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Last Name, First Name, Middle Name and Designation)</font></td>
+                </tr>
+            </table> 
+
+            @php
+                }
+                else if($count_roster==9)
+                {
+            @endphp
+
+            @foreach ($family_rosters as $roster )
+                <tr>
+                    <td height="20">{{ $x."."; }}</td>
+                    <td>{{$roster->LAST_NAME}}</td>
+                    <td>{{$roster->FIRST_NAME}}</td>
+                    <td>{{$roster->MIDDLE_NAME}}</td>
+                    <td>{{$roster->RELATION_TO_HH_HEAD}}</td>
+                    <td>{{$roster->SEX}}</td>
+                    <td>{{$roster->AGE}}</td>
+                    <td>{{$roster->BIRTHDAY}}</td>
+                    <td>{{$roster->CIVIL_STATUS}}</td>
+                    <td>{{$roster->GRADE_LEVEL}}</td>
+                    <td>{{$roster->ATTEND_SCHOOL}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @php $x++; @endphp
+                @endforeach 
+
+                @php
+                    $counter = 1;
+                    for($x=0;$x<$counter;$x++){
+                   
+                @endphp
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                @php
+                    }
+                @endphp
+
+            
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+               
+            </table>
+            <table>
+            <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-weight: normal;font-size:12px">Accomplished by:</font></td>
+                    <td><font style="font-style:normal;font-weight: normal;font-size:12px">If not the ML/SWO</font></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>____________________________________</td>
+                    <td>_________________________________</td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-size:12px">Signature over Printed Name of the ML/SWO</font></td>
+                    <td><font style="font-style:normal;font-size:12px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature over Printed Name</font></td>
+                </tr>
+                <tr>
+                    <td><font style="font-style:normal;font-size:8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Last Name, First Name, Middle Name)</font></td>
+                    <td><font style="font-style:normal;font-size:8px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Last Name, First Name, Middle Name and Designation)</font></td>
+                </tr>
+            </table> 
+
+            @php
+                }
+                else if($count_roster>=10)
                 {
             @endphp
 
@@ -520,7 +872,7 @@
             
              
             </table>
-            <br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br>
             <table>
             <tr>
                     <td>&nbsp;</td>
