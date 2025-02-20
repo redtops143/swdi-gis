@@ -1,59 +1,122 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Untitled Page</title>
-<meta name="generator" content="">
-<link href="Untitled1.css" rel="stylesheet">
-<link href="index.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWDI-GIS</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        #loading {
+            display: none;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+
 </head>
 <body>
 
-<div id="wb_Form1" style="position:absolute;left:0px;top:0px;width:1378px;height:1055px;z-index:2;">
-<form name="Form1" method="post" action="mailto:yourname@yourdomain.com" enctype="multipart/form-data" id="Form1">
-<table style="position:absolute;width:100%;height:974px;" id="Table1">
-<tr>
-<td colspan="2" class="cell0"><p>Form 1</p></td>
-</tr>
-<tr>
-<td colspan="2" class="cell1"><p style="font-size:13px;">&nbsp;</p>
-<p style="font-size:13px;">&nbsp;</p>
-<p style="font-size:13px;">Department of Social Welfare and Development</p>
-<p style="font-size:13px;">Batasan Complex Constitute Hills Quezon City</p>
-<p style="font-size:13px;">&nbsp;</p>
-<p style="font-size:13px;">&nbsp;</p>
-<p style="font-family:Arial;font-size:13px;"><span style="font-family:arial;font-size:20px;line-height:22.5px;">GENERAL INTAKE SHEET</span></p></td>
-</tr>
-<tr>
-<td colspan="2" class="cell2"><p style="font-size:17px;line-height:20px;"><span style="font-size:16px;line-height:18px;">&nbsp;</span><span style="font-size:16px;line-height:18px;">Date of Interview: </span>________________&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Time Started: ______________________</p>
-<p style="font-size:17px;line-height:20px;">&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; (mm/dd/yyyy)&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; Wave No.:_________________________</p>
-<p style="font-family:Arial;font-size:13px;line-height:16px;"><span style="font-family:arial;font-size:17px;line-height:20px;font-weight:bold;font-style:italic;">PART I. Family Identification</span></p></td>
-</tr>
-<tr>
-<td colspan="2" class="cell3"><p style="font-family:Arial;font-size:13px;line-height:16px;"><span style="font-family:arial;font-size:19px;line-height:21px;">&nbsp;</span><span style="font-family:arial;font-size:19px;line-height:21px;">1. ID No.&nbsp; </span></p></td>
-</tr>
-<tr>
-<td class="cell4"><br></td>
-<td class="cell5"><br></td>
-</tr>
-<tr>
-<td class="cell4"><br></td>
-<td class="cell5"><br></td>
-</tr>
-<tr>
-<td class="cell4"><br></td>
-<td class="cell5"><br></td>
-</tr>
-<tr>
-<td class="cell4"><br></td>
-<td class="cell5"><br></td>
-</tr>
-<tr>
-<td class="cell6"><br></td>
-<td class="cell7"><br></td>
-</tr>
-</table>
-</form>
-</div>
+    <h2>Generate SWDI GIS</h2>
+
+    <form id="locationForm">
+        @csrf
+        <label for="province">Select Province:</label>
+       
+        <select name="province" id="province">
+            <option value="">-- Select Province --</option>
+           
+            @foreach($provinces as $province)
+                <option value="{{ $province->PROVINCE }}">{{ $province->PROVINCE }}</option>
+            @endforeach
+
+        </select>
+
+        <label for="municipality">Select Municipality:</label>
+        <select name="municipality" id="municipality">
+            <option value="">-- Select Municipality --</option>
+        </select>
+
+        <p id="loading">Generating PDF... <span id="percentage">0%</span></p>
+
+        <button type="submit">Submit</button>
+
+        
+
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $('#province').change(function () {
+                var provinceId = $(this).val();
+                $('#municipality').html('<option value="">Loading...</option>');
+
+
+                $.ajax({
+                    url: "{{ route('get.municipalities') }}",
+                    type: "GET",
+                    data: { PROVINCE: provinceId },
+                    success: function (data) {
+                        $('#municipality').html('<option value="">-- Select Municipality --</option>');
+                        $.each(data, function (key, municipality) {
+                            $('#municipality').append('<option value="' + municipality.MUNICIPALITY + '">' + municipality.MUNICIPALITY + '</option>');
+                        });
+                    }
+                });
+            });
+
+
+            $('#locationForm').submit(function (e) {
+                e.preventDefault(); // Prevent default form submission
+                $('#submitBtn').prop('disabled', true); // Disable button
+                $('#loading').show();
+                $('#percentage').text('0%');
+
+                var percent = 0;
+                var interval = setInterval(function () {
+                    if (percent < 90) {
+                        percent += 10;
+                        $('#percentage').text(percent + '%');
+                    }
+                }, 500); // Simulate progress every 500ms
+
+                // Call the PDF generation after loading starts
+                $.ajax({
+                    url: "{{ route('generate.pdf') }}",
+                    type: "POST",
+                    data: $('#locationForm').serialize(),
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    xhrFields: {
+                        responseType: 'blob' // Handle PDF response
+                    },
+                    success: function (response) {
+                        clearInterval(interval); // Stop progress bar updates
+                        $('#percentage').text('100%'); // Set progress to 100%
+
+                        var blob = new Blob([response], { type: 'application/pdf' });
+                        var link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = 'SWDI-GIS ' + $('#province').val() + '_' + $('#municipality').val() + '.pdf';
+                        link.click();
+
+                        $('#loading').text('PDF Generated!');
+                        setTimeout(() => {
+                            $('#loading').hide();
+                            $('#submitBtn').prop('disabled', false);
+                        }, 1000);
+                    },
+                    error: function () {
+                        alert('Error generating PDF');
+                        clearInterval(interval);
+                        $('#loading').hide();
+                        $('#submitBtn').prop('disabled', false);
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>

@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use TCPDF;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Models\family_rosters;
 use App\Models\Grantees;
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
 class PDFController extends Controller
 {
-    public function generatePDF(Request $request)
+    public function generatePDF()
     {
 
 
@@ -35,9 +34,8 @@ class PDFController extends Controller
         //$hh_id = '166806001-8923-00003';
         //$hh_id = $_REQUEST['hh_id'];
         //$PUROK = 'PUROK 1';
-        $PROVINCE = $request->province;
-        $MUNICIPALITY = $request->municipality;
-       
+        $PROVINCE = $_REQUEST['prov'];
+        $MUNICIPALITY = $_REQUEST['mun'];
         
         DB::table('grantees')
                             ->where('PROVINCE',$PROVINCE)
