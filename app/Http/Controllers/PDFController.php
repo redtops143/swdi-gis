@@ -86,7 +86,7 @@ class PDFController extends Controller
                                                                     CIVIL_STATUS,
                                                                     GRADE_LEVEL,
                                                                     ATTEND_SCHOOL')
-                                                        ->orderBy('RELATION_TO_HH_HEAD','asc')                
+                                                        ->orderBy('AGE','desc')                
                                                         ->get();
                     
                                     $count_roster = $family_rosters->count();
